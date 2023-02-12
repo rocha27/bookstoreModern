@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -10,6 +9,35 @@
     />
   </head>
   <body>
-    <h1>Categoria</h1>
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20vh;
+        margin-top: 20px;
+      "
+    >
+      <table>
+        <tr>
+          <th>Id</th>
+          <th>Nome</th>
+          <th>Descrição</th>
+        </tr>
+        <tr *ngFor="let item of categorias">
+          <td>{{ item.id }}</td>
+          <td>{{ item.nome }}</td>
+          <td>{{ item.descricao }}</td>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      const toggleButton = document.querySelector("#mode-toggle");
+
+      toggleButton.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+      });
+    </script>
   </body>
 </html>

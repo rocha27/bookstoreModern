@@ -10,20 +10,21 @@ import { CategoriaService } from './categoria.service';
 })
 export class CategoriasComponent implements OnInit {
 
+
   categorias!: CategoriaModel[];
+  darkmode = false
 
   constructor(private service: CategoriaService,
               private router: Router) { }
 
   ngOnInit(): void {
-    this.teste()
+    this.list()
   }
 
-  teste() {
+  list() {
     this.service.findAll().subscribe(resposta => {
       this.categorias = resposta;
       console.log(resposta)
     })
   }
-
 }
