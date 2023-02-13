@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { CategoriaModel } from './categoria.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +14,9 @@ export class CategoriaService {
 
   findAll(): Observable<any> {
     return this.http.get(this.baseUrl);
+  }
+
+  create(categoria: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, categoria);
   }
 }

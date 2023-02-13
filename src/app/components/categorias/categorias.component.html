@@ -24,13 +24,52 @@
         type="button"
         label="Adicionar Categoria"
         class="p-button-rounded"
-        style="background-color: #333; font-weight: bold;"
+        (click)="showModalDialog()"
+        style="background-color: #333; font-weight: bold"
       ></button>
-
+      <p-dialog
+        header="Adicionar Categoria"
+        [(visible)]="displayModal"
+        [modal]="true"
+        [style]="{ width: '50vw', height: '20em' }"
+        [baseZIndex]="10000"
+        [draggable]="false"
+        [resizable]="false"
+      >
+        <span class="p-float-label" style="margin-top: 1.2em">
+          <input
+            id="float-input"
+            type="text"
+            style="width: 100%; border-color: #333"
+            [(ngModel)]="nomeCategoria"
+            pInputText
+          />
+          <label style="color: #333">Nome</label>
+        </span>
+        <span class="p-float-label" style="margin-top: 2em">
+          <input
+            id="float-input"
+            type="text"
+            style="width: 100%; border-color: #333"
+            [(ngModel)]="descricaoCategoria"
+            pInputText
+          />
+          <label style="color: #333">Descrição</label>
+        </span>
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Salvar"
+            class="p-button-rounded"
+            style="background-color: #333; font-weight: bold"
+            (click)="create()"
+          ></button>
+        </ng-template>
+      </p-dialog>
     </div>
-    <div
-     style="margin-top: 1em;"
-    >
+    <div style="margin-top: 1em">
       <table>
         <tr>
           <th>Id</th>
@@ -49,7 +88,7 @@
               type="button"
               icon="pi pi-pencil"
               class="p-button-rounded p-button-outlined"
-              style="color: #0652dd"
+              style="color: black"
             ></button>
             <button
               pButton

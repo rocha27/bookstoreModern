@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoriaModel } from './categoria.model';
 import { CategoriaService } from './categoria.service';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
-  styleUrls: ['./categorias.component.css']
+  styleUrls: ['./categorias.component.css'],
 })
 export class CategoriasComponent implements OnInit {
+  categorias!: any[];
+  nomeCategoria = '';
+  descricaoCategoria = ''
+  displayModal!: boolean;
 
-
-  categorias!: CategoriaModel[];
-  darkmode = false
-
-  constructor(private service: CategoriaService,
-              private router: Router,
-              private primengConfig: PrimeNGConfig) { }
+  constructor(
+    private service: CategoriaService,
+    private router: Router,
+    private primengConfig: PrimeNGConfig
+  ) {}
 
   ngOnInit(): void {
     this.list();
@@ -25,42 +26,29 @@ export class CategoriasComponent implements OnInit {
   }
 
   list() {
-    this.service.findAll().subscribe(resposta => {
-      this.categorias = resposta;
-      console.log(resposta)
-    })
+    this.service.findAll().subscribe((response) => {
+      this.categorias = response;
+      console.log(response);
+    });
   }
 
-  displayModal!: boolean;
+  showModalDialog() {
+    this.displayModal = true;
+  }
 
-    displayBasic!: boolean;
-
-    displayBasic2!: boolean;
-
-    displayMaximizable!: boolean;
-
-    displayPosition!: boolean;
-
-    position!: string;
-
-    showModalDialog() {
-        this.displayModal = true;
+  create() {
+    let requisicao = {
+      nome : this.nomeCategoria,
+      descricao: this.descricaoCategoria
     }
 
-    showBasicDialog() {
-        this.displayBasic = true;
-    }
-
-    showBasicDialog2() {
-        this.displayBasic2 = true;
-    }
-
-    showMaximizableDialog() {
-        this.displayMaximizable = true;
-    }
-
-    showPositionDialog(position: string) {
-        this.position = position;
-        this.displayPosition = true;
-    }
+    this.service.create(requisicao).subscribe((response) => {
+      console.log(response)
+      this.list();
+    })
+    this.nomeCategoria = ''
+    this.descricaoCategoria = ''
+    this.displayModal = false;
+    console.log(requisicao)
+  }
 }
