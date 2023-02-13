@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {InputTextModule} from 'primeng/inputtext';
 import {TabMenuModule} from 'primeng/tabmenu';
 import { CardModule } from 'primeng/card';
+import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { CardModule } from 'primeng/card';
     
     InputTextModule,
     TabMenuModule,
-    CardModule
+    CardModule,
+    ButtonModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
