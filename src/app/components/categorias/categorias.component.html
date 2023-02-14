@@ -9,27 +9,19 @@
     />
   </head>
   <body>
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /* height: 20vh; */
-        /* margin-top: 20px; */
-      "
-    >
+    <div style="display: flex; justify-content: center; align-items: center">
       <button
         pButton
         pRipple
         type="button"
         label="Adicionar Categoria"
         class="p-button-rounded"
-        (click)="showModalDialog()"
+        (click)="showModalDialogCreate()"
         style="background-color: #333; font-weight: bold"
       ></button>
       <p-dialog
         header="Adicionar Categoria"
-        [(visible)]="displayModal"
+        [(visible)]="displayModalCreate"
         [modal]="true"
         [style]="{ width: '50vw', height: '20em' }"
         [baseZIndex]="10000"
@@ -89,7 +81,52 @@
               icon="pi pi-pencil"
               class="p-button-rounded p-button-outlined"
               style="color: black"
+              pTooltip="Editar"
+              tooltipPosition="top"
+              (click)="showModalDialogEdit(item)"
             ></button>
+            <p-dialog
+              header="Edição de Categoria"
+              [(visible)]="displayModalEdit"
+              [modal]="true"
+              [style]="{ width: '50vw', height: '20em' }"
+              [baseZIndex]="10000"
+              [draggable]="false"
+              [resizable]="false"
+            >
+              <span class="p-float-label" style="margin-top: 1.2em">
+                <input
+                  id="float-input"
+                  type="text"
+                  style="width: 100%; border-color: #333"
+                  [(ngModel)]="nomeCategoria"
+                  pInputText
+                />
+                <label style="color: #333">Nome</label>
+              </span>
+              <span class="p-float-label" style="margin-top: 2em">
+                <input
+                  id="float-input"
+                  type="text"
+                  style="width: 100%; border-color: #333"
+                  [(ngModel)]="descricaoCategoria"
+                  pInputText
+                />
+                <label style="color: #333">Descrição</label>
+              </span>
+              <ng-template pTemplate="footer">
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  label="Salvar"
+                  class="p-button-rounded"
+                  style="background-color: #333; font-weight: bold"
+                  (click)="edit()"
+                ></button>
+              </ng-template>
+            </p-dialog>
+
             <button
               pButton
               pRipple
@@ -97,7 +134,40 @@
               icon="pi pi-trash"
               class="p-button-rounded p-button-outlined"
               style="color: red"
+              (click)="showModalDialogDelete(item.id)"
+              pTooltip="Excluir"
+              tooltipPosition="top"
             ></button>
+            <p-dialog
+              header="Tem certeza que deseja excluir?"
+              [(visible)]="displayModalDelete"
+              [modal]="true"
+              [style]="{ width: '28vw', height: '10em' }"
+              [baseZIndex]="10000"
+              [draggable]="false"
+              [resizable]="false"
+            >
+              <ng-template pTemplate="footer">
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  label="Sim"
+                  class="p-button-rounded"
+                  style="background-color: red; font-weight: bold"
+                  (click)="delete()"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  label="Não"
+                  class="p-button-rounded"
+                  style="background-color: #333; font-weight: bold"
+                  (click)="showModalDialogDeleteClose()"
+                ></button>
+              </ng-template>
+            </p-dialog>
           </td>
         </tr>
       </table>

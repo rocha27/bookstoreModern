@@ -16,6 +16,8 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import { CardModule } from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
+import {TooltipModule} from 'primeng/tooltip';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import {DialogModule} from 'primeng/dialog';
     TabMenuModule,
     CardModule,
     ButtonModule,
-    DialogModule
+    DialogModule,
+    TooltipModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

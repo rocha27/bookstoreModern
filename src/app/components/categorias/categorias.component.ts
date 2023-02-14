@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriaService } from './categoria.service';
-import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-categorias',
@@ -10,19 +9,19 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class CategoriasComponent implements OnInit {
   categorias!: any[];
+  id!: any;
+  categoria!: any;
   nomeCategoria = '';
-  descricaoCategoria = ''
-  displayModal!: boolean;
+  descricaoCategoria = '';
+  displayModalCreate!: boolean;
+  displayModalEdit!: boolean;
+  displayModalDelete!: boolean;
+  buttonDelete!: boolean;
 
-  constructor(
-    private service: CategoriaService,
-    private router: Router,
-    private primengConfig: PrimeNGConfig
-  ) {}
+  constructor(private service: CategoriaService, private router: Router) {}
 
   ngOnInit(): void {
     this.list();
-    this.primengConfig.ripple = true;
   }
 
   list() {
@@ -32,23 +31,65 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
-  showModalDialog() {
-    this.displayModal = true;
+  showModalDialogCreate() {
+    this.nomeCategoria = '';
+    this.descricaoCategoria = '';
+    this.displayModalCreate = true;
+  }
+
+  showModalDialogEdit(item: any) {
+    this.categoria = item;
+    this.nomeCategoria = item.nome;
+    this.descricaoCategoria = item.descricao;
+
+    this.displayModalEdit = true;
+  }
+
+  showModalDialogDelete(id: any) {
+    this.id = id;
+    this.displayModalDelete = true;
+    console.log(this.categorias);
+  }
+
+  showModalDialogDeleteClose() {
+    this.displayModalDelete = false;
   }
 
   create() {
     let requisicao = {
-      nome : this.nomeCategoria,
+      nome: this.nomeCategoria,
+      descricao: this.descricaoCategoria,
+    };
+
+    this.service.create(requisicao).subscribe((response) => {
+      console.log(response);
+      this.list();
+    });
+    this.nomeCategoria = '';
+    this.descricaoCategoria = '';
+    this.displayModalCreate = false;
+    console.log(requisicao);
+  }
+
+  edit() {
+    let requisicao = {
+      id: this.categoria.id,
+      nome: this.nomeCategoria,
       descricao: this.descricaoCategoria
     }
 
-    this.service.create(requisicao).subscribe((response) => {
-      console.log(response)
+    this.service.edit(requisicao).subscribe((response) => {
+      console.log(response);
       this.list();
     })
-    this.nomeCategoria = ''
-    this.descricaoCategoria = ''
-    this.displayModal = false;
-    console.log(requisicao)
+    this.displayModalEdit = false;
+  }
+
+  delete() {
+    this.service.delete(this.id).subscribe((response) => {
+      console.log(response);
+      this.list();
+    });
+    this.displayModalDelete = false;
   }
 }
