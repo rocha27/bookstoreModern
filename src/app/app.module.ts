@@ -18,6 +18,7 @@ import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {TooltipModule} from 'primeng/tooltip';
 import {ToastModule} from 'primeng/toast';
+import { LivrosComponent } from './components/livros/livros.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {ToastModule} from 'primeng/toast';
     HeaderComponent,
     FooterComponent,
     CategoriasComponent,
+    LivrosComponent,
   ],
   imports: [
     BrowserModule,
