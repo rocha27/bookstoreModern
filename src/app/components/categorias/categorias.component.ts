@@ -65,8 +65,6 @@ export class CategoriasComponent implements OnInit {
       console.log(response);
       this.list();
     });
-    this.nome = '';
-    this.descricao = '';
     this.displayModalCreate = false;
     console.log(requisicao);
   }

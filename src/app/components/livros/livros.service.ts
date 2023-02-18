@@ -14,10 +14,19 @@ export class LivrosService {
     return this.http.get(`${this.baseUrl}${id_categorias}/livros`)
   }
 
-  create(id: any, livro: any) {
-    let url = `${this.baseUrl}${id}/livros`;
-    console.log(url, livro)
-    return this.http.post<any>(url, livro)
+  create(livro: any): Observable<any> {
+    const url = 'http://localhost:3002/livros/'
+    return this.http.post(`${url}`, livro)
+  }
+
+  edit(livro: any): Observable<any> {
+    const url = 'http://localhost:3002/livros/'
+    return this.http.put(`${url}${livro.id}`, livro)
+  }
+
+  delete(id: any): Observable<any> {
+    const url = 'http://localhost:3002/livros/';
+    return this.http.delete(`${url}${id}`)
   }
 
 }
