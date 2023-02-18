@@ -1,1 +1,72 @@
-<p>livros works!</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div style="display: flex; justify-content: center; align-items: center">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Adicionar Livro"
+        class="p-button-rounded"
+        style="background-color: #333; font-weight: bold"
+      ></button>
+    </div>
+    <div style="margin-top: 1em">
+      <table>
+        <tr>
+          <th>Id</th>
+          <th>Autor</th>
+          <th>Título</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+        <tr *ngFor="let item of livros">
+          <td>{{ item.id }}</td>
+          <td>{{ item.autor }}</td>
+          <td>{{ item.titulo }}</td>
+          <td>{{ item.descricao }}</td>
+          <td>
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-book"
+              class="p-button-rounded p-button-outlined"
+              style="color: blue"
+              pTooltip="Livro"
+              tooltipPosition="top"
+            ></button>
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-outlined"
+              style="color: black"
+              pTooltip="Editar"
+              tooltipPosition="top"
+            ></button>
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-outlined"
+              style="color: red"
+              pTooltip="Excluir"
+              tooltipPosition="top"
+            ></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -11,8 +11,8 @@ export class CategoriasComponent implements OnInit {
   categorias!: any[];
   id!: any;
   categoria!: any;
-  nomeCategoria = '';
-  descricaoCategoria = '';
+  nome = '';
+  descricao = '';
   displayModalCreate!: boolean;
   displayModalEdit!: boolean;
   displayModalDelete!: boolean;
@@ -32,15 +32,15 @@ export class CategoriasComponent implements OnInit {
   }
 
   showModalDialogCreate() {
-    this.nomeCategoria = '';
-    this.descricaoCategoria = '';
+    this.nome = '';
+    this.descricao = '';
     this.displayModalCreate = true;
   }
 
   showModalDialogEdit(item: any) {
     this.categoria = item;
-    this.nomeCategoria = item.nome;
-    this.descricaoCategoria = item.descricao;
+    this.nome = item.nome;
+    this.descricao = item.descricao;
 
     this.displayModalEdit = true;
   }
@@ -57,16 +57,16 @@ export class CategoriasComponent implements OnInit {
 
   create() {
     let requisicao = {
-      nome: this.nomeCategoria,
-      descricao: this.descricaoCategoria,
+      nome: this.nome,
+      descricao: this.descricao,
     };
 
     this.service.create(requisicao).subscribe((response) => {
       console.log(response);
       this.list();
     });
-    this.nomeCategoria = '';
-    this.descricaoCategoria = '';
+    this.nome = '';
+    this.descricao = '';
     this.displayModalCreate = false;
     console.log(requisicao);
   }
@@ -74,8 +74,8 @@ export class CategoriasComponent implements OnInit {
   edit() {
     let requisicao = {
       id: this.categoria.id,
-      nome: this.nomeCategoria,
-      descricao: this.descricaoCategoria
+      nome: this.nome,
+      descricao: this.descricao
     }
 
     this.service.edit(requisicao).subscribe((response) => {

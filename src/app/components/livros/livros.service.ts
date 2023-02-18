@@ -10,8 +10,14 @@ export class LivrosService {
 
   constructor(private http: HttpClient) { }
 
-  findAll(id: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}${id}`)
+  findAll(id_categorias: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}${id_categorias}/livros`)
+  }
+
+  create(id: any, livro: any) {
+    let url = `${this.baseUrl}${id}/livros`;
+    console.log(url, livro)
+    return this.http.post<any>(url, livro)
   }
 
 }

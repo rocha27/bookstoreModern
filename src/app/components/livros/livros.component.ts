@@ -9,7 +9,12 @@ import { LivrosService } from './livros.service';
 })
 export class LivrosComponent implements OnInit {
 
-  userId: any;
+  idCategoria: any;
+  livros!: any[];
+  displayModalCreate!: boolean;
+  autor = '';
+  titulo = '';
+  descricao = '';
 
   constructor( private service: LivrosService,
                private route: ActivatedRoute,
@@ -17,14 +22,16 @@ export class LivrosComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.userId = params['id']
+      this.idCategoria = params['id']
     })
-    this.teste();
+    this.list();
   }
 
-  teste() {
-    this.service.findAll(this.userId).subscribe((response) => {
+  list() {
+    this.service.findAll(this.idCategoria).subscribe((response) => {
+      this.livros = response
       console.log(response)
     })
   }
+
 }
