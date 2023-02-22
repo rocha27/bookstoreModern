@@ -61,16 +61,14 @@
         </ng-template>
       </p-dialog>
     </div>
-    <div style="margin-top: 1em">
+    <div style="margin-top: 1em; display: flex; justify-content: center; align-items: center">
       <table>
         <tr>
-          <th>Id</th>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th>Ações</th>
+          <th style="width: 30%;">Nome</th>
+          <th style="width: 30%;">Descrição</th>
+          <th style="width: 10%;">Ações</th>
         </tr>
         <tr *ngFor="let item of categorias">
-          <td>{{ item.id }}</td>
           <td>{{ item.nome }}</td>
           <td>{{ item.descricao }}</td>
           <td>
