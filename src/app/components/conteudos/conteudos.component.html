@@ -14,16 +14,16 @@
         pButton
         pRipple
         type="button"
-        label="Adicionar Categoria"
+        label="Adicionar Conteúdo"
         class="p-button-rounded"
-        (click)="showModalDialogCreate()"
         style="background-color: #333; font-weight: bold"
+        (click)="showModalDialogCreate()"
       ></button>
       <p-dialog
-        header="Adicionar Categoria"
+        header="Adicionar Conteúdo"
         [(visible)]="displayModalCreate"
         [modal]="true"
-        [style]="{ width: '50vw', height: '20em' }"
+        [style]="{ width: '50vw', height: '23em' }"
         [baseZIndex]="10000"
         [draggable]="false"
         [resizable]="false"
@@ -33,20 +33,30 @@
             id="float-input"
             type="text"
             style="width: 100%; border-color: #333"
-            [(ngModel)]="nome"
+            [(ngModel)]="autor"
             pInputText
           />
-          <label style="color: #333">Nome</label>
+          <label style="color: #333">Autor</label>
         </span>
         <span class="p-float-label" style="margin-top: 2em">
           <input
             id="float-input"
             type="text"
             style="width: 100%; border-color: #333"
-            [(ngModel)]="descricao"
+            [(ngModel)]="titulo"
             pInputText
           />
-          <label style="color: #333">Descrição</label>
+          <label style="color: #333">Título</label>
+        </span>
+        <span class="p-float-label" style="margin-top: 2em">
+          <input
+            id="float-input"
+            type="text"
+            style="width: 100%; border-color: #333"
+            [(ngModel)]="link"
+            pInputText
+          />
+          <label style="color: #333">Link</label>
         </span>
         <ng-template pTemplate="footer">
           <button
@@ -64,15 +74,13 @@
     <div style="margin-top: 1em">
       <table>
         <tr>
-          <th>Id</th>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th>Ações</th>
+          <th>Autor</th>
+          <th style="width: 65%;">Título</th>
+          <th style="width: 10%;">Ações</th>
         </tr>
-        <tr *ngFor="let item of categorias">
-          <td>{{ item.id }}</td>
-          <td>{{ item.nome }}</td>
-          <td>{{ item.descricao }}</td>
+        <tr *ngFor="let item of conteudos">
+          <td>{{ item.autor }}</td>
+          <td>{{ item.titulo }}</td>
           <td>
             <button
               pButton
@@ -81,9 +89,9 @@
               icon="pi pi-book"
               class="p-button-rounded p-button-outlined"
               style="color: blue"
-              pTooltip="Conteúdos"
+              pTooltip="Conteúdo"
               tooltipPosition="top"
-              routerLink="{{item.id}}/conteudos"
+              (click)="abreLink(item.link)"
             ></button>
             <button
               pButton
@@ -97,10 +105,10 @@
               (click)="showModalDialogEdit(item)"
             ></button>
             <p-dialog
-              header="Alterar de Categoria"
+              header="Alterar Conteúdo"
               [(visible)]="displayModalEdit"
               [modal]="true"
-              [style]="{ width: '50vw', height: '20em' }"
+              [style]="{ width: '50vw', height: '23em' }"
               [baseZIndex]="10000"
               [draggable]="false"
               [resizable]="false"
@@ -110,17 +118,27 @@
                   id="float-input"
                   type="text"
                   style="width: 100%; border-color: #333"
-                  [(ngModel)]="nome"
+                  [(ngModel)]="autor"
                   pInputText
                 />
-                <label style="color: #333">Nome</label>
+                <label style="color: #333">Autor</label>
               </span>
               <span class="p-float-label" style="margin-top: 2em">
                 <input
                   id="float-input"
                   type="text"
                   style="width: 100%; border-color: #333"
-                  [(ngModel)]="descricao"
+                  [(ngModel)]="titulo"
+                  pInputText
+                />
+                <label style="color: #333">Título</label>
+              </span>
+              <span class="p-float-label" style="margin-top: 2em">
+                <input
+                  id="float-input"
+                  type="text"
+                  style="width: 100%; border-color: #333"
+                  [(ngModel)]="link"
                   pInputText
                 />
                 <label style="color: #333">Descrição</label>
@@ -137,7 +155,6 @@
                 ></button>
               </ng-template>
             </p-dialog>
-
             <button
               pButton
               pRipple
@@ -145,9 +162,9 @@
               icon="pi pi-trash"
               class="p-button-rounded p-button-outlined"
               style="color: red"
-              (click)="showModalDialogDelete(item.id)"
               pTooltip="Excluir"
               tooltipPosition="top"
+              (click)="showModalDialogDelete(item.id)"
             ></button>
             <p-dialog
               header="Tem certeza que deseja excluir?"
